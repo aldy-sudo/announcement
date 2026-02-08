@@ -18,61 +18,57 @@
             overflow: hidden; height: 100vh; width: 100vw;
         }
 
-        /* Blitz Overlay */
         #blitz-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #fff; z-index: 10000; opacity: 0; pointer-events: none;
         }
 
-        /* Start Button - Medium */
         #start-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex;
             align-items: center; justify-content: center; cursor: pointer;
         }
         #start-screen h2 { 
-            border: 1px solid var(--white); padding: 15px 30px; 
-            letter-spacing: 3px; font-weight: 400; font-size: 1.1rem; 
+            border: 1px solid var(--white); padding: 12px 25px; 
+            letter-spacing: 3px; font-weight: 400; font-size: 1rem; 
             transition: 0.5s; text-transform: uppercase;
         }
-        #start-screen h2:hover { background: var(--white); color: #000; }
 
-        canvas { position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.35; }
+        canvas { position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.3; }
 
-        /* TAHAP 1: LOADING - Medium */
+        /* LOADING - Ukuran Bar & Font diperkecil */
         #loading-screen {
             position: relative; z-index: 100;
             display: none; flex-direction: column; align-items: center;
             justify-content: center; height: 100vh;
         }
-        .progress-box { width: 400px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; }
-        #fill { width: 0%; height: 100%; background: var(--red); box-shadow: 0 0 15px var(--red); }
+        .progress-box { width: 250px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+        #fill { width: 0%; height: 100%; background: var(--red); box-shadow: 0 0 10px var(--red); }
         #status { 
-            margin-top: 20px; font-size: 1.8rem; font-weight: 900; 
-            letter-spacing: 6px; color: var(--red); text-transform: uppercase; 
-            text-align: center;
+            margin-top: 15px; font-size: 0.9rem; font-weight: 700; /* Font Initializing Diperkecil */
+            letter-spacing: 4px; color: var(--red); text-transform: uppercase; 
+            text-align: center; font-family: 'JetBrains Mono', monospace;
         }
 
-        /* TAHAP 2: NARASI - Medium */
+        /* NARASI - Ukuran Medium Seimbang */
         #message-screen {
             position: relative; z-index: 100;
             display: none; flex-direction: column; align-items: center;
             justify-content: center; height: 100vh; text-align: center; padding: 0 12%;
         }
-        .giant-text { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; line-height: 1.2; color: var(--white); } 
-        .sub-text { font-family: 'JetBrains Mono', monospace; color: var(--green); font-size: 1rem; margin: 8px 0; letter-spacing: 0.5px; }
+        .giant-text { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.2; color: var(--white); } 
+        .sub-text { font-family: 'JetBrains Mono', monospace; color: var(--green); font-size: 0.95rem; margin: 6px 0; opacity: 0.9; }
 
-        /* TAHAP 3: OUTRO - Medium High */
+        /* OUTRO - Font Diperkecil */
         #outro-screen {
             position: relative; z-index: 100;
             display: none; flex-direction: column; align-items: center;
             justify-content: center; height: 100vh;
         }
-        #outro-text { font-size: 3.5rem; font-weight: 900; color: var(--red); letter-spacing: 2px; text-shadow: 0 0 20px var(--red); }
+        #outro-text { font-size: 2.5rem; font-weight: 900; color: var(--red); letter-spacing: 2px; } /* Font Outro Diperkecil */
         .char { opacity: 0; transition: opacity 1.2s ease-in-out; display: inline-block; }
         .fade-in { opacity: 1; }
 
-        /* Blitz Animation */
         .blitz-active { animation: blitz-anim 1.6s ease-out forwards; }
         @keyframes blitz-anim {
             0% { opacity: 0; }
@@ -115,8 +111,8 @@
     const ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿ";
-    const fontSize = 16;
+    const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = Array.from({ length: columns }).fill(1);
     
@@ -154,7 +150,7 @@
                 document.getElementById('fill').style.width = width + '%';
                 document.getElementById('status').innerText = `INITIALIZING... ${Math.floor(width)}%`;
             }
-        }, 60);
+        }, 65);
     }
 
     async function showMessages() {
@@ -216,6 +212,10 @@
             }, 300);
         }, 2000);
     }
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    });
 </script>
 </body>
 </html>
